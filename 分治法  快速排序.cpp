@@ -1,0 +1,47 @@
+#include<iostream>
+#define N 5
+using namespace std;
+
+int Partition(int a[],int s,int t)    //划分算法
+{
+	int i=s;
+	int j=t;
+	int tmp=a[s];        //用序列的第1个记录作为基准
+	while(i!=j)          //从序列两端交替向中间扫描，直至i=j为止  
+	{
+		while(j>i && a[j]>=tmp)
+		    j--;       //从右向左扫描，找第1个关键字小于tmp的a[j]
+		a[i] = a[j];   //将a[j]前移到a[i]的位置
+		while(i<j && a[i]<=tmp)
+		    i++;        //从左向右扫描，找第1个关键字大于tmp的a[i]
+		a[j] = a[i];    //将a[i]后移到a[j]的位置
+	}
+	a[i] = tmp;
+	return i;
+}
+
+void QuickSort(int a[],int s,int t)    //对a[s..t]元素序列进行递增排序
+{ 
+	if(s<t)                           //序列内至少存在2个元素的情况
+	{
+		int i = Partition(a,s,t);
+		QuickSort(a,s,i-1);           //对左子序列递归排序
+		QuickSort(a,i+1,t);           //对右子序列递归排序
+	}
+}
+
+int main()
+{
+	int a[N];
+	while(cout<<"input a[]:")
+	{
+		for(int i=0;i<N;i++)
+		    cin>>a[i];
+		    
+		QuickSort(a,0,N-1);
+		
+		for(int j=0;j<N;j++)
+		    cout<<a[j]<<" ";
+		cout<<endl<<endl; 
+	}
+}
