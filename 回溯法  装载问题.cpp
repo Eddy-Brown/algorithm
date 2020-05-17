@@ -1,6 +1,6 @@
 //简单的装载问题 
 #include<iostream>
-#define MAXN 100
+#define MAXN 20
 using namespace std;
 //问题表示
 int n = 5;                            
